@@ -1,0 +1,50 @@
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id                 String   @id @default(uuid())
+  email              String   @unique
+  password           String
+  role               Role     @default(ADMIN)
+  hashedRefreshToken String? 
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+// Model to store section-specific JSON configurations for dynamic CMS editing
+model CmsContent {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+// Model to store custom wood products/types
+model WoodType {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  image     String
+  features  Json     // Array of { label: string; positive: boolean }
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Model to store custom services and pricing matrices
+model Service {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  prices    Json     // Array of { length: Int, width: Int, thickness: Int, cubicMeter: Float, pricePerM3: Float, pricePerPiece: Float }
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
