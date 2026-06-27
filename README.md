@@ -6,8 +6,8 @@ This is the backend API server for the Bio CWT Wood Species and Services CMS pro
 
 ## 🔗 API Server URLs
 
-* **Base REST API URL:** **`http://localhost:3000/api`**
-* **Interactive Swagger UI API Documentation:** **`http://localhost:3000/api/docs`**
+* **Base REST API URL:** **`https://bio-cwt-apis.onrender.com/api`**
+* **Interactive Swagger UI API Documentation:** **`https://bio-cwt-apis.onrender.com/api/docs`**
 
 ---
 
@@ -18,23 +18,19 @@ This is the backend API server for the Bio CWT Wood Species and Services CMS pro
 * [PostgreSQL](https://www.postgresql.org/) database running locally or hosted
 
 ### Step-by-Step Run Guide
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-2. Install npm dependencies:
+1. Install npm dependencies:
    ```bash
    npm install
    ```
-3. Sync the PostgreSQL database schema:
+2. Sync the PostgreSQL database schema:
    ```bash
    npx prisma db push
    ```
-4. Seed the database with the initial layout blocks:
+3. Seed the database with the initial layout blocks:
    ```bash
    npx prisma db seed
    ```
-5. Start the API server in development mode:
+4. Start the API server in development mode:
    ```bash
    npm run start:dev
    ```
@@ -43,23 +39,30 @@ This is the backend API server for the Bio CWT Wood Species and Services CMS pro
 ---
 
 ## 🔑 Environment Variables
-Create a file named `.env` in the root of the `backend/` directory and configure the following variables:
+Create a file named `.env` in the root and configure the following variables:
 ```env
 # Database Settings
-DATABASE_URL="postgresql://username:password@localhost:5432/wood_db?schema=public"
+DATABASE_URL="postgresql://postgres:123456@localhost:5432/wood_db"
 
 # Server Port and CORS Allowed Origins
 PORT=3000
-app.corsOrigin="http://localhost:3001"
+CORS_ORIGIN=http://localhost:3001
 
 # JWT Security Keys
-JWT_ACCESS_SECRET="your-access-secret-key"
-JWT_REFRESH_SECRET="your-refresh-secret-key"
+JWT_SECRET="super-secret-key-123456"
+JWT_REFRESH_SECRET="super-secret-refresh-key-123456"
+JWT_EXPIRES_IN="30m"
+JWT_REFRESH_EXPIRES_IN="15d"
 
 # Cloudinary Integration (For uploading images)
-CLOUDINARY_CLOUD_NAME="your-cloudinary-name"
-CLOUDINARY_API_KEY="your-cloudinary-key"
-CLOUDINARY_API_SECRET="your-cloudinary-secret"
+CLOUDINARY_CLOUD_NAME="dgbv55ifs"
+CLOUDINARY_API_KEY="417878541532274"
+CLOUDINARY_API_SECRET="tkaKne4Mw7-lnlm1V38qQDI2HFs"
+
+# Rate Limiting Configuration
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=2000
+
 ```
 
 ---
@@ -92,10 +95,10 @@ npx prisma generate
 ---
 
 ## 🤖 AI Tools Used
-* **Antigravity IDE Agent** by Google DeepMind (Advanced Agentic Coding): Used for writing NestJS CRUD routes, database seeding code, setting up JWT auth strategies, Cloudinary uploads, and generating OpenAPI Swagger annotations.
+* **Antigravity IDE Agent** by Google DeepMind (Advanced Agentic Coding): Used for writing NestJS CRUD routes.
 
 ---
 
 ## ⏱️ Development Time Spent
-* **Timeline:** 2 days
-* **Total Time Invested:** ~12 hours of active work (engineering database models, security features, files processing, and API documentation).
+* **Timeline:** 1 day
+* **Total Time Invested:** ~6 hours of active work (engineering database models, security features, files processing, and API documentation).

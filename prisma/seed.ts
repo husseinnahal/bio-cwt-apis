@@ -10,8 +10,26 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  const adminEmail = 'admin@wood.com';
 
+  // Check if admin already exists
+  const existingAdmin = await prisma.user.findUnique({
+    where: { email: adminEmail },
+  });
 
+  if (!existingAdmin) {
+    const hashedPassword = await bcrypt.hash('admin123', 10);
+    await prisma.user.create({
+      data: {
+        email: adminEmail,
+        password: hashedPassword,
+        role: 'ADMIN',
+      },
+    });
+    console.log('Seeded initial admin user successfully: admin@wood.com');
+  } else {
+    console.log('Admin user already exists, skipping seed');
+  }
   // Seed default CMS content for the Hero Section
   await prisma.cmsContent.upsert({
     where: { key: 'hero' },
