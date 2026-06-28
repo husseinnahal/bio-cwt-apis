@@ -42,11 +42,12 @@ This is the backend API server for the Bio CWT Wood Species and Services CMS pro
 Create a file named `.env` in the root and configure the following variables:
 ```env
 # Database Settings
-DATABASE_URL="postgresql://postgres:123456@localhost:5432/wood_db"
+DATABASE_URL="postgresql://neondb_owner:npg_ofeC5gw6Tcal@ep-wispy-resonance-atfrs8g1.c-9.us-east-1.aws.neon.tech/postegresssql?"
+
 
 # Server Port and CORS Allowed Origins
 PORT=3000
-CORS_ORIGIN=http://localhost:3001
+CORS_ORIGIN=https://bio-cwt-delta.vercel.app
 
 # JWT Security Keys
 JWT_SECRET="super-secret-key-123456"
@@ -95,7 +96,7 @@ npx prisma generate
 ---
 
 ## 🤖 AI Tools Used
-* **Antigravity IDE Agent** by Google DeepMind (Advanced Agentic Coding): Used for writing NestJS CRUD routes.
+* **Claude (Anthropic)**: Used for writing NestJS CRUD routes and functional modules.
 
 ---
 
