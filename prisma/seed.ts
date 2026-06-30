@@ -10,7 +10,8 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const adminEmail = 'admin@wood.com';
+  const adminEmail = process.env.SEED_ADMIN_EMAIL || 'adminwood@wood.com';
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD || 'woodAdmin123';
 
   // Check if admin already exists
   const existingAdmin = await prisma.user.findUnique({
@@ -18,7 +19,7 @@ async function main() {
   });
 
   if (!existingAdmin) {
-    const hashedPassword = await bcrypt.hash('admin123', 10);
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
     await prisma.user.create({
       data: {
         email: adminEmail,
